@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虛擬冰箱</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="piano.png" type="image/x-icon">
+</head>
+<body>
+  <!-- 頂部導覽 -->
+    <header>
+        <h1>虛擬冰箱</h1>
+    </header>
+    <nav>
+        <a href="#" id="nav-fridge">冰箱</a>
+        <a href="#" id="nav-recipes">食譜</a>
+    </nav>
+    <div id="fridge" class="content">
+        <!-- 左側過期提醒 -->
+        <div class="warning">
+        </div>   
+         <!-- 右側食材表格 -->
+        <div class="table-container">
+            <h2>食材列表</h2>
+            <table>
+                <div id="ingredient-table">
+                </div>
+            </table>
+        </div>
+  
+        <button id="showBoxButton">+</button>
+  
+        <div id="popupBox" class="popup-box">
+            <div class="popup-content">
+                <div class="modal-body">
+                    <label for="name">名稱：</label>
+                    <input type="text" id="name" required><br>
+    
+                    <label for="quantity">數量：</label>
+                    <input type="number" id="quantity" required><br>
+    
+                    <label for="expiry">有效期限：</label>
+                    <input type="date" id="expiry" required><br>
+    
+                    <label for="category">分類：</label>
+                    <select id="category">
+                    <option value="豆類/蛋/肉">豆類/蛋/肉</option>
+                    <option value="蔬果">蔬果</option>
+                    <option value="冷凍">冷凍</option>
+                    </select><br>                
+                </div>
+                <button id="addButton" onclick="addIngredient()">添加</button>
+                <button id="closeButton">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="recipes" class="content hidden">
+        <h2>食譜</h2>
+        <div class="recipes-section">
+            <h2>使用全部食材的食譜</h2>
+            <div id = "all-ingredients-recipes" class="recipe-container">
+                <!-- 動態插入菜譜內容 -->
+                <ul id="recipes-container"></ul>
+            </div>
+        </div>
+    </div> 
+
+    <!--<script type="module" src="js/main.js"></script> -->
+    <script src="script.js"></script>
+</body>
+</html>
