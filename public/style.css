@@ -217,7 +217,7 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     font-weight: bold; /* 加粗字体 */
 }
 
-.recipe-card {
+.recipes-container {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
@@ -225,21 +225,11 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     max-width: 300px;
 }
 
-.recipe-card img {
+.recipe-text {
+    text-align: left;
+}
+
+.recipe-text img {
     width: 100%;
     border-radius: 4px;
 }
-
-.recipe-card ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.recipe-card li {
-    margin: 4px 0;
-}
-
-.recipe {   border: 1px solid #ddd; 
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px; }
