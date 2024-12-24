@@ -1,0 +1,235 @@
+/* 基本頁面樣式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+/* 頂部導覽區域 */
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #576CA8;
+    color: white;
+    font-size: 1.2em;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    padding: 0 20px;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ccc;
+}
+
+nav a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+nav a:hover {
+    background-color: #ddd;
+}
+
+/* 左側提醒區 */
+.warning {
+    background-color: #f28482;
+    color: #000;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.warning h3 {
+    margin: 0 0 10px;
+}
+
+/* 右側食材表格 */
+.table-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h2 {
+    margin-bottom: 15px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.table-container th {
+    background-color: #f4f4f4;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 讓彈出框顯示在頁面中央 */
+.popup-box {
+    display: none; /* 預設不顯示 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* 讓彈出框顯示在頁面中央 */
+.popup-box {
+    display: none; /* 預設不顯示 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 160px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* 彈出框內部內容 */
+.popup-content {
+    text-align: center;
+}
+
+#showBoxButton {
+    height: 50px;
+    width: 50px;
+    background-color: #576CA8;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#showBoxButton:hover {
+    background-color: #576CA8;
+}
+
+#addButton, #closeButton{
+    padding: 10px 20px;
+    background-color: #576CA8;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#addButton, #closeButton:hover {
+    background-color: #576CA8;
+}
+
+/* 食材分類區域 */
+.category-section {
+    margin-bottom: 20px;
+}
+
+.category-section h3 {
+    cursor: pointer; /* 滑鼠指標改為點擊手勢 */
+    background-color: #669bbc;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ddd;
+}
+.category-section h3:hover {
+    background-color: #8ecae6; /* 滑鼠懸停效果 */
+}
+
+.category-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th:nth-child(1) { width: 150px; } /* 第一欄固定150px */
+th:nth-child(2) { width: 80px; }  /* 第二欄固定80px */
+th:nth-child(3) { width: 120px; } /* 第三欄固定120px */
+th:nth-child(4) { width: 100px; } /* 第四欄固定100px */
+th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
+
+.category-section th, .category-section td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.category-section th {
+    background-color: #f4f4f4;
+}
+
+.category-section td button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.category-section td button:hover {
+    background-color: #ff4b3a;
+}
+
+/* 警告行的样式 */
+.warning-row {
+    background-color: #ffe6e6; /* 浅红色背景 */
+    color: #d9534f; /* 深红色字体 */
+    font-weight: bold; /* 加粗字体 */
+}
+
+.recipes-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    max-width: 300px;
+}
+
+.recipe-text {
+    text-align: left;
+}
+
+.recipe-text img {
+    width: 100%;
+    border-radius: 4px;
+}
