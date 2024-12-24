@@ -327,7 +327,7 @@ async function fetchRecipes() {
                     <p><strong>網址：</strong> <a href="${recipe.Url}" target="_blank">${recipe.Url}</a></p>
                     <p><strong>食材：</strong> ${recipe.Ingredients.join(', ')}</p>
                     <p><strong>作法：</strong><br>${recipe.RecipeDetail.replace(/\n/g, '<br>')}</p>
-                    <img src="${recipe.Image || 'placeholder.jpg'}" alt="食譜圖片">
+                    <img src="${recipe.Image || '../src/placeholder.jpg'}" alt="食譜圖片">
                 </div>
             `;
 
