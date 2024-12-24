@@ -37,7 +37,7 @@ app.post('/fetch_recipes', async (req, res) => { //async:非同步
 
     try {
         // 發送 POST 請求到 Python 爬蟲服務
-        const response = await axios.post('http://localhost:8001/fetch_recipes', { ingredients });
+        const response = await axios.post('https://final-projrct.onrender.com/fetch_recipes', { ingredients });
 
         // 獲取爬蟲結果
         const recipes = response.data;
