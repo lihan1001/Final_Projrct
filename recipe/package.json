@@ -1,0 +1,21 @@
+{
+  "name": "recipe-crawler",
+  "version": "1.0.0",
+  "description": "A web scraper for fetching recipes from iCook with a Flask backend.",
+  "main": "recipe_crawler.py",
+  "scripts": {
+    "start": "python recipe_crawler.py"
+  },
+  "dependencies": {
+    "flask": "^2.3.0",
+    "flask-cors": "^3.0.10",
+    "requests": "^2.31.0",
+    "beautifulsoup4": "^4.12.2"
+  },
+  "engines": {
+    "python": ">=3.7"
+  },
+  "keywords": ["web scraper", "recipes", "flask", "icook"],
+  "author": "Your Name",
+  "license": "MIT"
+}
