@@ -80,7 +80,7 @@ def fetch_recipes():
                         continue
 
         # 儲存到 JSON 檔案
-        output_path = './icook/recipe.json'
+        output_path = '../src/recipe.json'
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(all_recipes, f, ensure_ascii=False, indent=4)
 
