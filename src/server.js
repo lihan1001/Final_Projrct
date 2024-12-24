@@ -16,7 +16,7 @@ app.use(bodyParser.json()); // 解析 JSON 格式的請求體
 
 // 獲取 recipe.json 的內容
 app.get('/recipes', (req, res) => {
-    const filePath = path.join(__dirname, 'icook/recipe.json');
+    const filePath = path.join(__dirname, 'recipe.json');
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
