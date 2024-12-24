@@ -37,13 +37,13 @@ app.post('/fetch_recipes', async (req, res) => { //async:非同步
 
     try {
         // 發送 POST 請求到 Python 爬蟲服務
-        const response = await axios.post('https://final-projrct.onrender.com/fetch_recipes', { ingredients });
+        const response = await axios.post('https://final-projrct-recipe.onrender.com/fetch_recipes', { ingredients });
 
         // 獲取爬蟲結果
         const recipes = response.data;
 
         // 將結果寫入 recipe.json
-        const filePath = path.join(__dirname, 'icook/recipe.json');
+        const filePath = path.join(__dirname, 'recipe.json');
         fs.writeFile(filePath, JSON.stringify(recipes, null, 2), (err) => {
             if (err) {
                 console.error('Error writing to recipe.json:', err);
@@ -63,14 +63,14 @@ app.post('/save_data', (req, res) => {
     console.log("接收到的資料:", data);
 
     // 將資料保存到檔案中（覆蓋舊資料）
-    fs.writeFile("public/fridge_data.json", JSON.stringify([data], null, 2), (writeErr) => {
+    fs.writeFile("../dict/fridge_data.json", JSON.stringify([data], null, 2), (writeErr) => {
         if (writeErr) {
             console.error("寫入檔案時發生錯誤:", writeErr);
             res.status(500).send({ message: '寫入檔案失敗' });
         }
 
         // 新資料已成功寫入，觸發 Python 腳本
-        exec('python public/quickstart.py', (err, stdout, stderr) => {
+        exec('python ../dict/quickstart.py', (err, stdout, stderr) => {
             if (err) {
                 console.error(`exec error: ${err}`);
                 return;
