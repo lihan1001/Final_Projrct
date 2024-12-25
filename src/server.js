@@ -5,6 +5,7 @@ const path = require('path'); //
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { exec } = require('child_process'); // 引入 exec 來執行外部命令
+const axios = require('axios'); // 引入 axios
 
 // 啟用 CORS 和 bodyParser
 const app = express(); //
