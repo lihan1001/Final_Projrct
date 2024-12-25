@@ -14,6 +14,8 @@ const port = 8000;
 app.use(cors());
 app.use(bodyParser.json()); // 解析 JSON 格式的請求體
 
+
+
 // 獲取 recipe.json 的內容
 app.get('/recipes', (req, res) => {
     const filePath = path.join(__dirname, 'recipe.json');
@@ -63,14 +65,14 @@ app.post('/save_data', (req, res) => {
     console.log("接收到的資料:", data);
 
     // 將資料保存到檔案中（覆蓋舊資料）
-    fs.writeFile("../dict/fridge_data.json", JSON.stringify([data], null, 2), (writeErr) => {
+    fs.writeFile("dict/fridge_data.json", JSON.stringify([data], null, 2), (writeErr) => {
         if (writeErr) {
             console.error("寫入檔案時發生錯誤:", writeErr);
             res.status(500).send({ message: '寫入檔案失敗' });
         }
 
         // 新資料已成功寫入，觸發 Python 腳本
-        exec('python ../dict/quickstart.py', (err, stdout, stderr) => {
+        exec('python src/quickstart.py', (err, stdout, stderr) => {
             if (err) {
                 console.error(`exec error: ${err}`);
                 return;
@@ -82,7 +84,6 @@ app.post('/save_data', (req, res) => {
         });
     });
 });
-
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
