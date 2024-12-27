@@ -29,7 +29,7 @@ app.get('/recipes', (req, res) => {
 });
 
 // 根據食材進行爬蟲，回傳對應的食譜
-/*app.post('/fetch_recipes', async (req, res) => { //async:非同步
+app.post('/fetch_recipes', async (req, res) => { //async:非同步
     const { ingredients } = req.body;
 
     if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
@@ -38,9 +38,12 @@ app.get('/recipes', (req, res) => {
 
     try {
         console.log('Sending request to Python scraper with ingredients:', ingredients);
+        console.log('Ingredients format:', typeof ingredients, Array.isArray(ingredients) ? 'Array' : 'Not an Array');
 
         // 發送 POST 請求到 Python 爬蟲服務
-        const response = await axios.post('http://localhost:8000/fetch_recipes', { ingredients: ingredients, });
+        const response = await axios.post('http://127.0.0.1:5000/fetch_recipes', { ingredients });
+        
+
 
         // 獲取爬蟲結果
         const recipes = response.data;
@@ -57,48 +60,7 @@ app.get('/recipes', (req, res) => {
         console.error('Error calling Python scraper:', error.response ? error.response.data : error.message);
         res.status(500).json({ error: 'Failed to fetch recipes' });
     }
-});*/
-
-let isRequesting = false; // 用于标记是否正在请求
-
-app.post('/fetch_recipes', async (req, res) => { 
-    const { ingredients } = req.body;
-    console.log("Sending request with ingredients:", ingredients);  // 查看请求内容
-    
-
-    if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
-        return res.status(400).json({ error: 'No ingredients provided or invalid format' });
-    }
-
-    try {
-        try {
-            // 确保发送的请求体格式是正确的
-            const response = await axios.post('http://localhost:8000/fetch_recipes', { ingredients: ingredients });
-            console.log("Response:", response);  // 打印响应内容
-        } catch (err) {
-            console.error('Error sending request to Python scraper:', err.message);
-            return res.status(500).json({ error: 'Failed to send request to Python scraper', details: err.message });
-        }
-
-        // 获取爬虫结果
-        const recipes = response.data;
-
-        // 将结果写入 recipe.json
-        fs.writeFile("recipe.json", JSON.stringify(recipes, null, 2), (err) => {
-            if (err) {
-                console.error('Error writing to recipe.json:', err);
-                return res.status(500).json({ error: 'Failed to save recipes' });
-            }
-            res.json({ message: 'Recipes fetched successfully', recipe_count: recipes.length, recipes });
-        });
-
-    } catch (error) {
-        console.error('Error calling Python scraper:', error.message);
-        res.status(500).json({ error: 'Failed to fetch recipes', details: error.message });
-    }
 });
-
-
 
 // 接收前端發送的多屬性資料
 app.post('/save_data', (req, res) => {

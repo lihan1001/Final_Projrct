@@ -20,7 +20,9 @@ def fetch_recipes():
     
     all_recipes = []
 
-    data = request.form.get_json()  # 获取请求体
+    data = request.get_json()  # 获取请求体
+    print("Raw data from request:", request.data)  # 打印原始請求數據
+    print("Parsed JSON data:", data)  # 打印解析後的 JSON 數據
 
     if not data:
         return jsonify({"error": "Invalid JSON format"}), 400
@@ -103,4 +105,4 @@ def fetch_recipes():
 
 # 測試函數
 if __name__ == "__main__":
-    app.run(host="localhost",port=5000,debug=True)
+    app.run(host="127.0.0.1",port=5000,debug=True)
