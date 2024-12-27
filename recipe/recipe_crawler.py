@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 #app的路由地址"/fetch_recipes"即為ajax中定義的url地址，采用POST提交
-@app.route('/fetch_recipes',methods=["POST"])
+@app.route('/fetch_recipes',methods=["GET"])
 
 #從這里定義具體的函式 回傳值均為json格式
 def fetch_recipes():
