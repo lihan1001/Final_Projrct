@@ -75,7 +75,7 @@ app.post('/save_data', (req, res) => {
         }
 
         // 新資料已成功寫入，觸發 Python 腳本
-        exec('python src/quickstart.py', (err, stdout, stderr) => {
+        exec('python quickstart.py', (err, stdout, stderr) => {
             if (err) {
                 console.error(`exec error: ${err}`);
                 return;
