@@ -220,7 +220,7 @@ function addIngredient() {
     };
 
     // 發送 POST 請求到 Node.js 後端
-    fetch('https://final-projrct.onrender.com/save_data', {
+    fetch('https://final-projrct-ppap.onrender.com/save_data', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -311,7 +311,7 @@ window.onload = function () { // 頁面載入時執行
 //fetchRecipes : 從一個固定的 JSON 檔案（recipe.json）中讀取食譜，並顯示到網頁。
 async function fetchRecipes() {
     try {
-        const response = await fetch('https://final-projrct.onrender.com/recipe.json'); // 從本地後端伺服器獲取資料
+        const response = await fetch('https://final-projrct-ppap.onrender.com/recipe.json'); // 從本地後端伺服器獲取資料
         const recipes = await response.json();
 
         const container = document.getElementById('recipes-container');
@@ -357,7 +357,7 @@ async function fetchRecipesFromFridge() {
 
          // 傳送食材清單到後端以觸發爬蟲
          // 發送包含食材的 POST 請求到 Node.js(8001) /fetch_recipes 路由
-        const response = await fetch('https://final-projrct.onrender.com/fetch_recipes', { // 注意端口為 8001
+        const response = await fetch('https://final-projrct-recipe-irnf.onrender.com/fetch_recipes', { // 注意端口為 8001
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ingredients })

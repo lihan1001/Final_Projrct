@@ -41,7 +41,7 @@ app.post('/fetch_recipes', async (req, res) => { //async:非同步
         console.log('Ingredients format:', typeof ingredients, Array.isArray(ingredients) ? 'Array' : 'Not an Array');
 
         // 發送 POST 請求到 Python 爬蟲服務
-        const response = await axios.post('http://127.0.0.1:5000/fetch_recipes', { ingredients });
+        const response = await axios.post('https://final-projrct-recipe-irnf.onrender.com/fetch_recipes', { ingredients });
         
 
 
