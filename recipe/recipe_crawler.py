@@ -14,10 +14,13 @@ CORS(app)
 
 
 
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome!"})
 
 
 #app的路由地址"/fetch_recipes"即為ajax中定義的url地址，采用POST提交
-@app.route('/')
+@app.route('/',methods=["POST"])
 #從這里定義具體的函式 回傳值均為json格式
 def fetch_recipes():
     base_url = "https://icook.tw/recipes/search?q={}&page={}"
