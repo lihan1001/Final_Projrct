@@ -82,5 +82,5 @@ def fetch_recipes(ingredients):
 
 # 測試函數
 if __name__ == "__main__":
-    ingredients = ["蒜"]
+    ingredients = ["泡菜"]
     recipes = fetch_recipes(ingredients)

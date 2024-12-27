@@ -361,7 +361,10 @@ async function fetchRecipesFromFridge() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ingredients })
-        });
+        })
+            .then(response => response.json())
+            .then(data => console.log('Recipes fetched:', data))
+            .catch(err => console.error('Error fetching recipes:', err));
 
         const result = await response.json();
 
