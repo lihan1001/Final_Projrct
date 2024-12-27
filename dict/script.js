@@ -386,7 +386,14 @@ async function fetchRecipesFromFridge() {
 
 async function fetchRecipesFromFridge() {
     const url = 'https://final-projrct-recipe-irnf.onrender.com/fetch_recipes';
-    const ingredients = ["雞肉"];
+    const ingredients = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith("food-")) {
+                const food = JSON.parse(localStorage.getItem(key));
+                ingredients.push(food.name);
+            }
+        }
 
     const response = await fetch(url, {
         method: 'POST',
