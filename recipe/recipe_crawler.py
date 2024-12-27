@@ -108,6 +108,7 @@ def fetch_recipes():
                             recipe_data["Image"] = image["src"]
 
                     all_recipes.append(recipe_data)
+                    print(f"食譜::{recipe_data}")
                 except Exception as e:
                     print(f"Error processing recipe: {e}")
                     continue
