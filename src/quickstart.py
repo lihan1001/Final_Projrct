@@ -3,24 +3,17 @@ import os.path
 import json
 from datetime import datetime
 
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from google.oauth2 import service_account
 
 # 如果修改這些範圍，請刪除 token.json 檔案
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
-SERVICE_ACCOUNT_FILE = "../dict/credentials.json"  # 這裡應該是您的服務帳戶密鑰文件的路徑
-
-# 使用服務帳戶憑證進行認證
-creds = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-
-# 建立 Google Calendar API 服務
-service = build("calendar", "v3", credentials=creds)
-
 # 從 JSON 檔案中讀取資料
-with open('../dict/fridge_data.json', 'r', encoding='utf-8') as file:
+with open('dict/fridge_data.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 def validate_date(date_str):
@@ -31,7 +24,22 @@ def validate_date(date_str):
         return False
 
 def main():
+    creds = None
+    if os.path.exists("token.json"):
+        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("dict/credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open("token.json", "w") as token:
+            token.write(creds.to_json())
+
     try:
+        service = build("calendar", "v3", credentials=creds)
+
         for ingredient in data:
             if validate_date(ingredient['expiry']):
                 expiry_date = ingredient['expiry']
