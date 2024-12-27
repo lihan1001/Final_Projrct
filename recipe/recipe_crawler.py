@@ -6,13 +6,9 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-
-
 #創建Flask物件app并初始化
 app = Flask(__name__)
 CORS(app)
-
-
 
 @app.route('/')
 def home():
@@ -20,7 +16,7 @@ def home():
 
 
 #app的路由地址"/fetch_recipes"即為ajax中定義的url地址，采用POST提交
-@app.route('/',methods=["POST"])
+@app.route('/fetch_recipes',methods=["POST", "OPTIONS"])
 #從這里定義具體的函式 回傳值均為json格式
 def fetch_recipes():
     base_url = "https://icook.tw/recipes/search?q={}&page={}"

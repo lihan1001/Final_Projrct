@@ -360,7 +360,7 @@ async function fetchRecipesFromFridge() {
         const response = await fetch('https://final-projrct-recipe-irnf.onrender.com/fetch_recipes', { // 注意端口為 8001
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ingredients })
+            body: JSON.stringify({ ingredients: ['番茄']  })
         })
             .then(response => response.json())
             .then(data => console.log('Recipes fetched:', data))
