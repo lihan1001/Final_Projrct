@@ -68,7 +68,7 @@ app.post('/save_data', (req, res) => {
     console.log("接收到的資料:", data);
 
     // 將資料保存到檔案中（覆蓋舊資料）
-    fs.writeFile("dict/fridge_data.json", JSON.stringify([data], null, 2), (writeErr) => {
+    fs.writeFile("../dict/fridge_data.json", JSON.stringify([data], null, 2), (writeErr) => {
         if (writeErr) {
             console.error("寫入檔案時發生錯誤:", writeErr);
             res.status(500).send({ message: '寫入檔案失敗' });
