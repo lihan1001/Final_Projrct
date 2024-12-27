@@ -338,6 +338,7 @@ async function fetchRecipes() {
     }
 }
 // fetchRecipesFromFridge : 動態地根據冰箱內的食材（localStorage）向後端發送請求，爬取與食材匹配的食譜，並更新到網頁。
+/*
 async function fetchRecipesFromFridge() {
     try {
          // 從 LocalStorage 收集食材清單
@@ -381,3 +382,25 @@ async function fetchRecipesFromFridge() {
         alert("無法連接到後端服務！");
     }
 }
+*/
+
+async function fetchRecipesFromFridge() {
+    const url = 'https://final-projrct-recipe-irnf.onrender.com/fetch_recipes';
+    const ingredients = ["雞肉"];
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ingredients }),
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Recipes fetched:', data);
+}
+

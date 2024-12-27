@@ -8,7 +8,9 @@ from flask_cors import CORS
 
 #創建Flask物件app并初始化
 app = Flask(__name__)
-CORS(app)
+
+# 啟用 Flask-CORS，允許指定的前端 URL
+CORS(app, resources={r"/fetch_recipes": {"origins": "https://final-projrct-5us7.onrender.com"}})
 
 @app.route('/')
 def home():
@@ -23,6 +25,14 @@ def fetch_recipes():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
     }
+
+    if request.method == "OPTIONS":
+        # 處理 CORS 預檢請求
+        response = jsonify({"message": "CORS preflight check OK"})
+        response.headers.add("Access-Control-Allow-Origin", "https://final-projrct-5us7.onrender.com")
+        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+        return response
     
     all_recipes = []
 
