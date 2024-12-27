@@ -13,7 +13,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 # 從 JSON 檔案中讀取資料
-with open('dict/fridge_data.json', 'r', encoding='utf-8') as file:
+with open('../dict/fridge_data.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 def validate_date(date_str):
@@ -32,7 +32,7 @@ def main():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("dict/credentials.json", SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file("../dict/credentials.json", SCOPES)
             creds = flow.run_local_server(port=0)
         with open("token.json", "w") as token:
             token.write(creds.to_json())
