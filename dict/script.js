@@ -311,7 +311,7 @@ window.onload = function () { // 頁面載入時執行
 //fetchRecipes : 從一個固定的 JSON 檔案（recipe.json）中讀取食譜，並顯示到網頁。
 async function fetchRecipes() {
     try {
-        const response = await fetch('https://final-projrct-ppap.onrender.com/recipe.json'); // 從本地後端伺服器獲取資料
+        const response = await fetch('https://final-projrct-recipe-irnf.onrender.com/recipe.json'); // 從本地後端伺服器獲取資料
         const recipes = await response.json();
 
         const container = document.getElementById('recipes-container');

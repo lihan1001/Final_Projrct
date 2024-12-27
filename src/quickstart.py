@@ -13,7 +13,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 # 從 JSON 檔案中讀取資料
-with open('dict/fridge_data.json', 'r', encoding='utf-8') as file:
+with open('../dict/fridge_data.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 def validate_date(date_str):
