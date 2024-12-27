@@ -4,9 +4,13 @@ import re
 import json
 import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+
 
 #創建Flask物件app并初始化
 app = Flask(__name__)
+CORS(app)
 
 #app的路由地址"/fetch_recipes"即為ajax中定義的url地址，采用POST提交
 @app.route('/fetch_recipes',methods=["POST"])
