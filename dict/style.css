@@ -224,11 +224,14 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     margin: 8px;
     display: flex;
     flex-wrap: wrap;
+    width: 100%; /* 確保父容器有足夠的寬度 */
+    max-width: 1200px; /* 設定最大寬度限制 */
     gap: 1rem;
 }
 
 .recipe-card {
     border: 1px solid #ddd;
+    background-color: #EDDEA4;
     border-radius: 8px;
     padding: 1rem;
     max-width: 300px;
