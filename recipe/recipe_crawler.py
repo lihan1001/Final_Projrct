@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 import os
+import psycopg2
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -50,6 +51,16 @@ def fetch_recipes():
     if not ingredients:
             return jsonify({"error": "No ingredients provided"}), 400
     print("Received requesto with ingredients:", request.json.get('ingredients'))  # 调试日志
+
+    # 连接 PostgreSQL 数据库
+    conn = psycopg2.connect(
+        dbname="your_database",
+        user="your_username",
+        password="your_password",
+        host="localhost",
+        port="5432"
+    )
+    cur = conn.cursor()
 
     for ingredient in ingredients:
         recipe_count = 0  # 用于记录当前爬取的食谱数量
@@ -115,6 +126,19 @@ def fetch_recipes():
                         image = content_soup.select_one('img.recipe-cover')
                         if image:
                             recipe_data["Image"] = image["src"]
+                    # 插入数据到 PostgreSQL
+                    cur.execute("""
+                    INSERT INTO recipes (recipe_name, url, ingredients, recipe_detail, image)
+                    VALUES (%s, %s, %s, %s, %s);
+                    """, (
+                        recipe_data.get("RecipeName"),
+                        recipe_data.get("Url"),
+                        recipe_data.get("Ingredients"),
+                        recipe_data.get("RecipeDetail"),
+                        recipe_data.get("Image")
+                    ))
+                    conn.commit()
+
 
                     all_recipes.append(recipe_data)
                     recipe_count += 1  # 增加计数器
@@ -125,6 +149,10 @@ def fetch_recipes():
                     continue
             if recipe_count >= max_recipes:
                 break  # 检查总数后退出外层循环
+    # 关闭数据库连接
+    cur.close()
+    conn.close()
+
     return jsonify(all_recipes),200
     
     # 儲存到 JSON 檔案
