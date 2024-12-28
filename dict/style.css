@@ -222,10 +222,8 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%; /* 確保父容器有足夠的寬度 */
-    max-width: 1200px; /* 設定最大寬度限制 */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
 
@@ -234,7 +232,6 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     background-color: #EDDEA4;
     border-radius: 8px;
     padding: 1rem;
-    max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
