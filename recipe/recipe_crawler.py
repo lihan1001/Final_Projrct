@@ -138,7 +138,7 @@ def fetch_recipes():
                         recipe_data["RecipeDetail"] = "\n".join(steps_data)
 
                         # 圖片
-                        image = content_soup.select('div[class="tofu_image"] > picture > img')[0]['src']
+                        image = content_soup.select_one('img.recipe-cover')
                         if image:
                             recipe_data["Image"] = image["src"]
                     # 插入数据到 PostgreSQL
