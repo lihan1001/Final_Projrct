@@ -51,13 +51,14 @@ def fetch_recipes():
     if not ingredients:
             return jsonify({"error": "No ingredients provided"}), 400
     print("Received requesto with ingredients:", request.json.get('ingredients'))  # 调试日志
+    
 
     # 连接 PostgreSQL 数据库
     conn = psycopg2.connect(
         dbname="recipes_u4hs",
         user="recipes_u4hs_user",
         password="lVj411CBNPInWeJ3z6DRwZprm0sQCGSQ",
-        host="postgresql://recipes_u4hs_user:lVj411CBNPInWeJ3z6DRwZprm0sQCGSQ@dpg-cto0nkrqf0us73akml30-a.singapore-postgres.render.com/recipes_u4hs",
+        host="dpg-cto0nkrqf0us73akml30-a.singapore-postgres.render.com",
         port="5432"
     )
     cur = conn.cursor()
