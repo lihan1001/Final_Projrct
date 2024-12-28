@@ -228,26 +228,12 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     gap: 1rem;
 }
 
-.recipe-text {
-    text-align: left;
-}
-
-.recipe-text img {
-    width: 100%;
-    border-radius: 4px;
-}
-
 .recipe-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1rem;
     max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-card img {
-    width: 100%;
-    border-radius: 8px;
 }
 
 .recipe-card h3 {
