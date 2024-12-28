@@ -410,10 +410,28 @@ async function fetchRecipesFromFridge() {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log('Recipes fetched:', data);
+    const recipes = await response.json();
+    console.log('Recipes fetched:', recipes);
 
-    // 保存到 localStorage（如果需要）
-    localStorage.setItem('fetched-recipes', JSON.stringify(data.recipe_data));
+    // TODO: 在这里将数据显示到页面上
+    displayRecipes(recipes);
 }
 
+function displayRecipes(recipes) {
+    const container = document.getElementById('recipes-container');
+    container.innerHTML = ''; // 清空之前的内容
+
+    recipes.forEach(recipe => {
+        const recipeCard = document.createElement('div');
+        recipeCard.className = 'recipe-card';
+
+        recipeCard.innerHTML = `
+            <h3>${recipe.RecipeName}</h3>
+            <img src="${recipe.Image}" alt="${recipe.RecipeName}" />
+            <p><strong>Ingredients:</strong> ${recipe.Ingredients.join(', ')}</p>
+            <p><strong>Steps:</strong><br>${recipe.RecipeDetail.replace(/\n/g, '<br>')}</p>
+            <a href="${recipe.Url}" target="_blank">View Full Recipe</a>
+        `;
+        container.appendChild(recipeCard);
+    });
+}

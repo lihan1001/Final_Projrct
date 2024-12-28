@@ -69,6 +69,9 @@ def fetch_recipes():
             recipes_obj = soup.select('li[class="browse-recipe-item"]')
 
             for recipe in recipes_obj:
+                if recipe_count >= max_recipes:
+                    break  # 再次检查，确保退出
+                
                 try:
                     recipe_data = {}
 
@@ -115,18 +118,21 @@ def fetch_recipes():
 
                     all_recipes.append(recipe_data)
                     recipe_count += 1  # 增加计数器
-                    
+
                     print(f"食譜::{recipe_data}")
                 except Exception as e:
                     print(f"Error processing recipe: {e}")
                     continue
-
+            if recipe_count >= max_recipes:
+                break  # 检查总数后退出外层循环
+    return jsonify(all_recipes),200
+    
     # 儲存到 JSON 檔案
-    output_path = os.path.join(os.path.dirname(__file__), '../src/recipe.json')
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(all_recipes, f, ensure_ascii=False, indent=4)
+    #output_path = os.path.join(os.path.dirname(__file__), '../src/recipe.json')
+    #with open(output_path, 'w', encoding='utf-8') as f:
+    #    json.dump(all_recipes, f, ensure_ascii=False, indent=4)
 
-    return jsonify(all_recipes)
+    
 
 # 測試函數
 if __name__ == "__main__":
