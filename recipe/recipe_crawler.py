@@ -63,6 +63,20 @@ def fetch_recipes():
     )
     cur = conn.cursor()
 
+    # 创建表（如果不存在）
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS recipes (
+            id SERIAL PRIMARY KEY,
+            recipe_name TEXT NOT NULL,
+            url TEXT,
+            ingredients TEXT,
+            recipe_detail TEXT,
+            image TEXT
+        );
+        """)
+    conn.commit()
+
+
     for ingredient in ingredients:
         recipe_count = 0  # 用于记录当前爬取的食谱数量
         for page in range(1, 2):  # 假設只爬取每個食材的前一頁
