@@ -414,6 +414,7 @@ async function fetchRecipesFromFridge() {
     const data = console.log(data)
     console.log('Recipes fetched:', recipes);
 
+
     // TODO: 在这里将数据显示到页面上
     fetchRecipes(recipes);
 }

@@ -47,6 +47,7 @@ app.post('/fetch_recipes', async (req, res) => { //async:非同步
 
         // 獲取爬蟲結果
         const recipes = response.data;
+        
 
         // 將結果寫入 recipe.json
         fs.writeFile("recipe.json", JSON.stringify(recipes, null, 2), (err) => {
