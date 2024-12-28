@@ -414,6 +414,6 @@ async function fetchRecipesFromFridge() {
     console.log('Recipes fetched:', data);
 
     // 保存到 localStorage（如果需要）
-    localStorage.setItem('fetched-recipes', JSON.stringify(data.recipes));
+    localStorage.setItem('fetched-recipes', JSON.stringify(data.recipe_data));
 }
 
