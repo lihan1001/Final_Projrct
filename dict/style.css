@@ -222,27 +222,18 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    max-width: 300px;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-}
-
-.recipe-text {
-    text-align: left;
-}
-
-.recipe-text img {
-    width: 100%;
-    border-radius: 4px;
 }
 
 .recipe-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1rem;
-    max-width: 300px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 1rem); /* 默认每行显示 2 个卡片 */
+    max-width: 300px;
 }
 
 .recipe-card img {
@@ -275,10 +266,15 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
 .recipe-card a:hover {
     background-color: #0056b3;
 }
-.content {
-    padding: 1rem;
+
+@media (max-width: 768px) {
+    .recipe-card {
+        flex: 1 1 calc(33.33% - 1rem); /* 屏幕宽度小于768px时，每行显示 3 个卡片 */
+    }
 }
 
-.content.hidden {
-    display: none;
+@media (max-width: 480px) {
+    .recipe-card {
+        flex: 1 1 100%; /* 屏幕宽度小于480px时，每行显示 1 个卡片 */
+    }
 }
