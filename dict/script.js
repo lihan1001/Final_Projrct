@@ -385,8 +385,6 @@ async function fetchRecipesFromFridge() {
 */
 
 async function fetchRecipesFromFridge() {
-    
-    
     const ingredients = [];
     // 从 localStorage 獲取食材
         for (let i = 0; i < localStorage.length; i++) {
@@ -406,10 +404,32 @@ async function fetchRecipesFromFridge() {
         body: JSON.stringify({ ingredients }),
     })
     .then(response => response.json())
-    .then(data => console.log(data))  // 檢查返回數據
+    .then(data => {
+        console.log(data); // 检查返回的数据
+        displayRecipes(data);
+    })
     .catch(error => console.error('Error fetching recipes:', error));
 
 
     // TODO: 在这里将数据显示到页面上
     fetchRecipes(recipes);
+}
+
+// 动态插入食谱数据到页面
+function displayRecipes(recipes) {
+    const container = document.getElementById('recipes-container');
+    container.innerHTML = ''; // 清空旧数据
+
+    recipes.forEach(recipe => {
+        const li = document.createElement('li');
+        li.classList.add('recipe-card');
+        
+        li.innerHTML = `
+            <img src="${recipe.Image || 'placeholder.jpg'}" alt="${recipe.RecipeName}">
+            <h3>${recipe.RecipeName}</h3>
+            <p>${recipe.Ingredients.join(', ')}</p>
+            <a href="${recipe.Url}" target="_blank">查看食谱</a>
+        `;
+        container.appendChild(li);
+    });
 }
