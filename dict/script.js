@@ -421,15 +421,14 @@ function displayRecipes(recipes) {
     container.innerHTML = ''; // 清空旧数据
 
     recipes.forEach(recipe => {
-        const li = document.createElement('li');
-        li.classList.add('recipe-card');
+        const div = document.createElement('div');
+        div.classList.add('recipe-card');
         
-        li.innerHTML = `
-            <img src="${recipe.Image || 'placeholder.jpg'}" alt="${recipe.RecipeName}">
+        div.innerHTML = `
             <h3>${recipe.RecipeName}</h3>
             <p>${recipe.Ingredients.join(', ')}</p>
             <a href="${recipe.Url}" target="_blank">查看食谱</a>
         `;
-        container.appendChild(li);
+        container.appendChild(div);
     });
 }
