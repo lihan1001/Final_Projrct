@@ -251,7 +251,7 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
 
 .recipe-card a {
     display: inline-block;
-    margin-top: 0.5rem;
+    margin-top: 3rem;
     padding: 0.5rem 1rem;
     background-color: #007BFF;
     color: white;
