@@ -222,7 +222,6 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    max-width: 300px;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
