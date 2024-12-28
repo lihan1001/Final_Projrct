@@ -54,10 +54,10 @@ def fetch_recipes():
 
     # 连接 PostgreSQL 数据库
     conn = psycopg2.connect(
-        dbname="your_database",
-        user="your_username",
-        password="your_password",
-        host="localhost",
+        dbname="recipes_u4hs",
+        user="recipes_u4hs_user",
+        password="lVj411CBNPInWeJ3z6DRwZprm0sQCGSQ",
+        host="postgresql://recipes_u4hs_user:lVj411CBNPInWeJ3z6DRwZprm0sQCGSQ@dpg-cto0nkrqf0us73akml30-a.singapore-postgres.render.com/recipes_u4hs",
         port="5432"
     )
     cur = conn.cursor()
