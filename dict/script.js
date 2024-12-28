@@ -385,7 +385,7 @@ async function fetchRecipesFromFridge() {
 */
 
 async function fetchRecipesFromFridge() {
-    const url = 'https://final-projrct-recipe-irnf.onrender.com/fetch_recipes';
+    
     
     const ingredients = [];
     // 从 localStorage 獲取食材
@@ -398,21 +398,16 @@ async function fetchRecipesFromFridge() {
         }
 
     // 調用 API 獲取食谱
-    const response = await fetch(url, {
+    await fetch('https://final-projrct-recipe-irnf.onrender.com/fetch_recipes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ ingredients }),
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const recipes = await response.json();
-    const data = console.log(data)
-    console.log('Recipes fetched:', recipes);
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))  // 檢查返回數據
+    .catch(error => console.error('Error fetching recipes:', error));
 
 
     // TODO: 在这里将数据显示到页面上
