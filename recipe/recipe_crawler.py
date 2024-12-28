@@ -35,6 +35,7 @@ def fetch_recipes():
         return response
     
     all_recipes = []
+    max_recipes = 5  # 设置最大爬取的食谱数量
 
     data = request.get_json()  # 获取请求体
     print("Raw data from request:", request.data)  # 打印原始請求數據
@@ -51,7 +52,12 @@ def fetch_recipes():
     print("Received requesto with ingredients:", request.json.get('ingredients'))  # 调试日志
 
     for ingredient in ingredients:
+        recipe_count = 0  # 用于记录当前爬取的食谱数量
         for page in range(1, 2):  # 假設只爬取每個食材的前一頁
+            
+            if recipe_count >= max_recipes:
+                break  # 达到最大数量时退出循环
+
             try:
                 res = requests.get(url=base_url.format(ingredient, page), headers=headers, timeout=10)
                 res.raise_for_status()  # 檢查請求是否成功

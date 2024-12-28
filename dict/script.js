@@ -386,7 +386,9 @@ async function fetchRecipesFromFridge() {
 
 async function fetchRecipesFromFridge() {
     const url = 'https://final-projrct-recipe-irnf.onrender.com/fetch_recipes';
+    
     const ingredients = [];
+    // 从 localStorage 獲取食材
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             if (key.startsWith("food-")) {
@@ -395,6 +397,7 @@ async function fetchRecipesFromFridge() {
             }
         }
 
+    // 調用 API 獲取食谱
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -409,5 +412,8 @@ async function fetchRecipesFromFridge() {
 
     const data = await response.json();
     console.log('Recipes fetched:', data);
+
+    // 保存到 localStorage（如果需要）
+    localStorage.setItem('fetched-recipes', JSON.stringify(data.recipes));
 }
 
