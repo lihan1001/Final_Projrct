@@ -222,15 +222,16 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    display: grid; /* 使用 Grid 布局 */
+    grid-template-columns: repeat(2, 1fr); /* 每行顯示兩列 */
+    gap: 8px;
 }
 
 .recipe-card {
     border: 1px solid #ddd;
     background-color: #EDDEA4;
     border-radius: 8px;
+    margin-top: 8px;
     padding: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
