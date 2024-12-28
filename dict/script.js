@@ -427,7 +427,7 @@ function displayRecipes(recipes) {
         div.innerHTML = `
             <h3>${recipe.RecipeName}</h3>
             <p>食材:${recipe.Ingredients.join(', ')}</p>
-            <p>作法:${recipe.RecipeDetail}</p>
+            <p>作法:${recipe.RecipeDetail}</p></br>
             <a href="${recipe.Url}" target="_blank">查看更多</a>
         `;
         container.appendChild(div);

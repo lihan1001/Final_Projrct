@@ -243,6 +243,7 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
 
 .recipe-card p {
     font-size: 0.9rem;
+    text-align: left;
     margin: 0.3rem 0;
     line-height: 1.4;
 }
