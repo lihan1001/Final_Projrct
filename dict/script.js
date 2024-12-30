@@ -26,8 +26,11 @@ function showPage(page) {
 // 彈出框功能
 // 獲取按鈕和彈出框元素
 const showBoxButton = document.getElementById('showBoxButton');
+const showCartButton = document.getElementById('showCartButton');
 const popupBox = document.getElementById('popupBox');
+const cartPopupBox = document.getElementById('cartPopupBox');
 const closeButton = document.getElementById('closeButton');
+const closeCartButton = document.getElementById('closeCartButton');
 
 // 顯示彈出框
 showBoxButton.addEventListener('click', () => {
@@ -37,6 +40,16 @@ showBoxButton.addEventListener('click', () => {
 // 關閉彈出框
 closeButton.addEventListener('click', () => {
     popupBox.style.display = 'none';
+});
+
+// 顯示購物車彈出框
+showCartButton.addEventListener('click', () => {
+    cartPopupBox.style.display = 'block';
+});
+
+// 關閉購物車彈出框
+closeCartButton.addEventListener('click', () => {
+    cartPopupBox.style.display = 'none';
 });
 //------------------------------------------------------
 //food.js
@@ -265,46 +278,97 @@ function deleteIngredient(key) {
     }
 }
 
-//--------------------------------------------------------
-//recipes.js //功能和fetchRecipes重複
-// function loadRecipes() {
-//     const recipeList = document.getElementById('recipe-list');
+// 新增購物清單項目
+function addToCart() {
+    const cartName = document.getElementById("cartName").value.trim();
+    const cartQuantity = document.getElementById("cartQuantity").value.trim();
+    const cartPopupBox = document.getElementById('cartPopupBox');
 
-//     // 假設你的 JSON 文件路徑統一在 "./icook/" 目錄
+    if (cartName && cartQuantity) {
+        // 從 Local Storage 讀取購物清單
+        const shoppingItems = JSON.parse(localStorage.getItem('cart-')) || [];
+
+        // 檢查是否已存在此項目
+        const existingItem = shoppingItems.find(item => item.name === cartName);
+        if (existingItem) {
+            existingItem.quantity = parseInt(existingItem.quantity) + parseInt(cartQuantity); // 合併數量
+        } else {
+            shoppingItems.push({ name: cartName, quantity: cartQuantity }); // 新增項目
+        }
+
+        localStorage.setItem('cart-', JSON.stringify(shoppingItems));
+        alert(`已將 ${cartName} 添加到購物清單，數量：${cartQuantity}`);
+        
+        // 清空表單
+        document.getElementById("cartName").value = '';
+        document.getElementById("cartQuantity").value = '';
+
+        loadShoppingList(); // 更新顯示購物清單
+        cartPopupBox.style.display = 'none'; // 添加完成後關閉懸浮窗
+    } else {
+        alert("請填寫名稱和數量！");
+    }
+}
+
+// 加載購物清單
+function loadShoppingList() {
+    const shoppingListDiv = document.getElementById('shoppingList');
+    shoppingListDiv.innerHTML = ''; // 清空清單
+
+    const shoppingItems = JSON.parse(localStorage.getItem('cart-')) || []; // 改成 cart-
     
-//     //fetch('./icook/recipe.json')// JSON 文件可以合併為一個或多個
-//     fetch('http://localhost:8000/icook/recipe.json')
-//         .then(response => response.json())
-//         .then(data => {
-//             recipeList.innerHTML = ''; // 清空列表
+    if (shoppingItems.length > 0) {
+        const shoppingHeader = document.createElement('h3');
+        shoppingListDiv.appendChild(shoppingHeader);
 
-//             data.forEach(recipe => {
-//                 // 創建食譜卡片
-//                 const recipeItem = document.createElement('li');
-//                 recipeItem.className = 'recipe-card';
+        const table = document.createElement('table');
+        table.innerHTML = `
+            <tr>
+                <th>名稱</th>
+                <th>數量</th>
+                <th></th>
+            </tr>
+        `;
 
-//                 recipeItem.innerHTML = `
-//                     <h3>${recipe.RecipeName}</h3>
-//                     <a href="${recipe.Url}" target="_blank">
-//                         <img src="${recipe.Image}" alt="${recipe.RecipeName}">
-//                     </a>
-//                     <p>${recipe.RecipeDetail}</p>
-//                     <ul>
-//                         ${recipe.Ingredients.map(ing => `<li>${ing.name}: ${ing.quantity}</li>`).join('')}
-//                     </ul>
-//                 `;
-//                 recipeList.appendChild(recipeItem);
-//             });
-//         })
-//         .catch(err => console.error('載入食譜失敗', err));
-// }
-//---------------------------------------------------------
-//main.js
+        shoppingItems.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+            `;
+
+            // 刪除按鈕
+            const actionCell = document.createElement('td');
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '刪除';
+            deleteButton.className = 'cartdelete-button';
+            deleteButton.onclick = () => deleteShoppingItem(index); // 刪除購物清單項目
+
+            actionCell.appendChild(deleteButton);
+            row.appendChild(actionCell);
+
+            table.appendChild(row);
+        });
+
+        shoppingListDiv.appendChild(table);
+    } else {
+        shoppingListDiv.textContent = '目前沒有任何購物清單項目。';
+    }
+}
+
+
+// 刪除購物清單項目
+function deleteShoppingItem(index) {
+    const shoppingItems = JSON.parse(localStorage.getItem('cart-')) || []; // 改成 cart-
+    shoppingItems.splice(index, 1); // 刪除指定的項目
+    localStorage.setItem('cart-', JSON.stringify(shoppingItems)); // 改成 cart-
+    loadShoppingList(); // 更新顯示
+}
+
 window.onload = function () { // 頁面載入時執行
     loadFood();  // 載入食材
-    //fetchRecipes(); // 載入食譜
+    loadShoppingList(); //載入購物清單
     fetchRecipesFromFridge();
-    //loadRecipes(); // 載入食譜
 };
 //---------------------------------------------------------
 //recipes.js

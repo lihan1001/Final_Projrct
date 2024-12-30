@@ -5,7 +5,7 @@ body {
     padding: 0;
     text-align: center;
     box-sizing: border-box;
-    background-color: #f9f9f9;
+    background-color: #B9D9EB;
 }
 
 /* 頂部導覽區域 */
@@ -45,7 +45,7 @@ nav a:hover {
     background-color: #ddd;
 }
 
-/* 提醒區 */
+/* 左側提醒區 */
 .warning {
     background-color: #f28482;
     color: #000;
@@ -59,7 +59,7 @@ nav a:hover {
     margin: 0 0 10px;
 }
 
-/* 食材表格 */
+/* 右側食材表格 */
 .table-container {
     display: flex;
     flex-direction: column;
@@ -101,12 +101,28 @@ nav a:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    height: 200px;
-    background-color: #fff;
+    height: 160px;
+    background-color: #B9D9EB;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 20px;
     border-radius: 10px;
+}
+
+/* 讓彈出框顯示在頁面中央 */
+.cartpopup-box {
+    display: none; /* 預設不顯示 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 100px;
+    background-color: #B9D9EB;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 /* 彈出框內部內容 */
@@ -114,45 +130,10 @@ nav a:hover {
     text-align: center;
 }
 
-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center; /* 水平置中 */
-    gap: 20px; /* 按鈕間距 */
-    margin-top: 20px; /* 與列表間距 */
-    margin-bottom: 20px; /* 與購買清單間距 */
-}
-
-#showBoxButton, #showCartButton {
+#showBoxButton {
     height: 50px;
     width: 50px;
-    background-color: #5775cf;
-    color: white;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-
-    /* 居中對齊 */
-    display: flex;
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
-
-    font-size: 18px; /* 調整字型大小 */
-    text-align: center;
-}
-
-#buttons-container:hover {
-    background-color: #576CA8;
-}
-
-#closeCartButton, #addCartButton, #addButton, #closeButton{
-    padding: 10px 20px;
-    background-color: #576CA8;
+    background-color: #669bbc;
     color: white;
     border: none;
     border-radius: 100px;
@@ -160,10 +141,52 @@ button {
     margin-top: 20px;
 }
 
-#closeCartButton, #addCartButton, #addButton, #closeButton:hover {
-    background-color: #576CA8;
+#showBoxButton:hover {
+    background-color: #8ecae6;
 }
 
+#showCartButton {
+    height: 50px;
+    width: 50px;
+    background-color: #669bbc;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#showCartButton:hover {
+    background-color: #8ecae6;
+}
+
+#addButton, #closeButton{
+    padding: 10px 20px;
+    background-color: #669bbc;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#addButton:hover, #closeButton:hover {
+    background-color: #8ecae6;
+}
+
+#addCartButton, #closeCartButton{
+    padding: 10px 20px;
+    background-color: #669bbc;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#addCartButton:hover, #closeCartButton:hover {
+    background-color: #8ecae6;
+}
 /* 食材分類區域 */
 .category-section {
     margin-bottom: 20px;
@@ -202,7 +225,7 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     background-color: #f4f4f4;
 }
 
-.table-container td button {
+.category-section td button {
     background-color: #ff6f61;
     color: white;
     border: none;
@@ -211,9 +234,24 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     cursor: pointer;
 }
 
-.table-container button:hover {
+.category-section td button:hover {
     background-color: #ff4b3a;
 }
+
+/*清單按鈕*/
+.cartdelete-button {
+    background-color: #ff6f61; /* 紅色背景 */
+    color: white; /* 白色文字 */
+    border: none; /* 無邊框 */
+    border-radius: 5px; /* 圓角 */
+    padding: 5px 10px; /* 內邊距 */
+    cursor: pointer; /* 滑鼠指標變為點擊狀態 */
+}
+
+.cartdelete-button:hover {
+    background-color: #ff4b3a;
+}
+
 
 /* 警告行的样式 */
 .warning-row {
@@ -222,19 +260,56 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     font-weight: bold; /* 加粗字体 */
 }
 
+/*食譜*/
 .recipes-container {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    max-width: 300px;
+    display: grid; /* 使用 Grid 布局 */
+    grid-template-columns: repeat(2, 1fr); /* 每行顯示兩列 */
+    gap: 8px;
 }
 
-.recipe-text {
+.recipe-card {
+    border: 1px solid #ddd;
+    background-color: #EDDEA4;
+    border-radius: 8px;
+    margin-top: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.recipe-card p {
+    font-size: 0.9rem;
     text-align: left;
+    margin: 0.3rem 0;
+    line-height: 1.4;
 }
 
-.recipe-text img {
-    width: 100%;
+.recipe-card a {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.5rem 1rem;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
     border-radius: 4px;
+    text-align: center;
+}
+
+.recipe-card a:hover {
+    background-color: #0056b3;
+}
+.content {
+    padding: 1rem;
+}
+
+.content.hidden {
+    display: none;
 }
