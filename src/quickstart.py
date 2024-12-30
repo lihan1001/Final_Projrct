@@ -1,16 +1,13 @@
 import datetime
-import os.path
+import os
 import json
 from datetime import datetime
 
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
-from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# Path to your service account credentials JSON file
-SERVICE_ACCOUNT_FILE = 'service_account.json'
 # 如果修改這些範圍，請刪除 token.json 檔案
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
@@ -27,26 +24,21 @@ def validate_date(date_str):
 
 def main():
     creds = None
-    # if os.path.exists("token.json"):
-    #     creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-
-    # if not creds or not creds.valid:
-    #     if creds and creds.expired and creds.refresh_token:
-    #         creds.refresh(Request())
-    #     else:
-    #         flow = InstalledAppFlow.from_client_secrets_file("../dict/credentials.json", SCOPES)
-    #         creds = flow.run_console()
-    #     with open("token.json", "w") as token:
-    #         token.write(creds.to_json())
-    
     try:
-        # Load service account credentials
-        creds = service_account.Credentials.from_service_account_file(
-            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return
+        # 從環境變數中獲取服務帳戶金鑰
+        credentials_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+        if not credentials_json:
+            raise ValueError("未找到 GOOGLE_APPLICATION_CREDENTIALS_JSON 環境變數")
 
+        # 將 JSON 字符串轉換為字典
+        credentials_info = json.loads(credentials_json)
+
+        # 使用服務帳戶金鑰初始化憑證
+        creds = service_account.Credentials.from_service_account_info(credentials_info, scopes=SCOPES)
+
+    except Exception as e:
+        print(f"An error occurred while loading credentials: {e}")
+        return
 
     try:
         service = build("calendar", "v3", credentials=creds)
@@ -83,7 +75,7 @@ def main():
                 print(f"Invalid date format for ingredient {ingredient['name']} with expiry {ingredient['expiry']}")
 
     except HttpError as error:
-        print(f"An error occurred: {error}")
+        print(f"An error occurred while creating events: {error}")
 
 if __name__ == "__main__":
     main()
