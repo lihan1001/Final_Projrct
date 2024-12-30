@@ -334,6 +334,8 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
+    color: #669bbc;
     z-index: 9999;
 }
 
