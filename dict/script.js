@@ -450,6 +450,11 @@ async function fetchRecipesFromFridge() {
 */
 
 async function fetchRecipesFromFridge() {
+    // 顯示加載畫面
+    const loadingScreen = document.getElementById('loading-screen');
+    loadingScreen.style.display = 'flex';
+
+    // 收集食材並觸發爬蟲
     const ingredients = [];
     // 从 localStorage 獲取食材
         for (let i = 0; i < localStorage.length; i++) {
@@ -473,8 +478,13 @@ async function fetchRecipesFromFridge() {
         console.log(data); // 检查返回的数据
         displayRecipes(data);
     })
-    .catch(error => console.error('Error fetching recipes:', error));
+    .catch(error => console.error('Error fetching recipes:', error))
 
+    .finally( () => {
+        // 隱藏加載畫面
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.display = 'none';
+    });
 
     // TODO: 在这里将数据显示到页面上
     fetchRecipes(recipes);
