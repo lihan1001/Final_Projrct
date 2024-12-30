@@ -5,31 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>虛擬冰箱</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../src/piano.png" type="image/x-icon">
 </head>
 <body>
   <!-- 頂部導覽 -->
     <header>
         <h1>虛擬冰箱</h1>
     </header>
+
     <nav>
         <a href="#" id="nav-fridge">冰箱</a>
         <a href="#" id="nav-recipes">食譜</a>
     </nav>
+
     <div id="fridge" class="content">
-        <!-- 左側過期提醒 -->
-        <div class="warning">
-        </div>   
-         <!-- 右側食材表格 -->
+        <!-- 過期提醒 -->
+        <div class="warning"></div>  
+
+         <!-- 食材表格 -->
         <div class="table-container">
             <h2>食材列表</h2>
             <table>
-                <div id="ingredient-table">
-                </div>
+                <tbody id="ingredient-table"></tbody>
             </table>
         </div>
-  
-        <button id="showBoxButton">+</button>
-  
+
+        <div class="button-container">
+            <button id="showBoxButton">+</button>
+            <button id="showCartButton">🛒</button>
+        </div>
+
+        <div class="table-container">
+            <table id="shoppingListTable">
+                <tbody id="shoppingList">
+                    <!-- 項目將通過 JS 動態插入 -->
+                </tbody>
+            </table>
+        </div>
+        
         <div id="popupBox" class="popup-box">
             <div class="popup-content">
                 <div class="modal-body">
@@ -53,16 +66,35 @@
                 <button id="closeButton">關閉</button>
             </div>
         </div>
+
+        <div id="cartPopupBox" class="popup-box">
+            <div class="popup-content">
+                <form id="cartForm" onsubmit="event.preventDefault(); addToCart();">
+                    <div class="modal-body">
+                        <label for="cartName">名稱：</label>
+                        <input type="text" id="cartName" required><br>
+        
+                        <label for="cartQuantity">數量：</label>
+                        <input type="number" id="cartQuantity" min="1" required><br>
+                    </div>
+                    <button type="submit" id="addCartButton">添加</button>
+                    <button type="button" id="closeCartButton">關閉</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div id="recipes" class="content hidden">
-        <div id = "recipe-container" class="recipe-container">
-            <!-- 動態插入菜譜內容 -->
-            <div id="recipes-container"></div>
+        <h2>食譜</h2>
+        <div class="recipes-section">
+            <h2>使用全部食材的食譜</h2>
+            <div id = "all-ingredients-recipes" class="recipe-container">
+                <!-- 動態插入菜譜內容 -->
+                <ul id="recipes-container"></ul>
+            </div>
         </div>
     </div> 
 
-    <!--<script type="module" src="js/main.js"></script> -->
     <script src="script.js"></script>
 </body>
 </html>
