@@ -369,7 +369,6 @@ function deleteShoppingItem(index) {
 window.onload = function () { // 頁面載入時執行
     loadFood();  // 載入食材
     loadShoppingList(); //載入購物清單
-    fetchRecipesFromFridge();
 };
 //---------------------------------------------------------
 //recipes.js
