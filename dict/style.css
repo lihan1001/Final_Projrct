@@ -324,8 +324,8 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
 #loading-screen {
     display: none; /* 默认隐藏 */
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
@@ -336,8 +336,8 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
 }
 
 .loading-image {
-    width: 100px; /* 根據需要調整圖片大小 */
-    height: 100px; /* 保持比例可以省略此屬性 */
+    width: 200px; /* 根據需要調整圖片大小 */
+    height: 200px; /* 保持比例可以省略此屬性 */
     animation: pulse 1.5s infinite; /* 可選：添加淡入淡出動畫 */
   }
   
