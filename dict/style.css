@@ -93,7 +93,7 @@ nav a:hover {
     display: none;
 }
 
-/* 讓彈出框顯示在頁面中央 */
+/* 食材輸入彈出框 */
 .popup-box {
     display: none; /* 預設不顯示 */
     position: fixed;
@@ -101,15 +101,18 @@ nav a:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    height: 160px;
+    height: 150px;
     background-color: #B9D9EB;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 20px;
     border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #669bbc;
 }
 
-/* 讓彈出框顯示在頁面中央 */
+/* 購物車彈出框 */
 .cartpopup-box {
     display: none; /* 預設不顯示 */
     position: fixed;
@@ -123,6 +126,9 @@ nav a:hover {
     z-index: 1000;
     padding: 20px;
     border-radius: 20px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #669bbc;
 }
 
 /* 彈出框內部內容 */

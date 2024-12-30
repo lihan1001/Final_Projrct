@@ -322,11 +322,12 @@ function loadShoppingList() {
         shoppingListDiv.appendChild(shoppingHeader);
 
         const table = document.createElement('table');
+        table.className = 'shopping-table'; // 新增類名
         table.innerHTML = `
             <tr>
-                <th>名稱</th>
-                <th>數量</th>
-                <th></th>
+                <th style="width: 50%;">名稱</th>
+                <th style="width: 30%;">數量</th>
+                <th style="width: 20%;"></th>
             </tr>
         `;
 
