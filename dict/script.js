@@ -483,6 +483,7 @@ async function fetchRecipesFromFridge() {
     .finally( () => {
         // 隱藏加載畫面
         const loadingScreen = document.getElementById('loading-screen');
+        console.log('Hiding loading screen...');
         loadingScreen.style.display = 'none';
     });
 
