@@ -137,12 +137,48 @@ function loadFood() {
         // 将该分类下的食材渲染到表格中
         categories[category].forEach(food => {
             const row = document.createElement('tr');
+
+            // 創建數量欄位內容，包含數字和按鈕
+            const quantityCell = document.createElement('td');
+            quantityCell.classList.add('quantity-cell'); // 新增類名
+            const decreaseButton = document.createElement('button');
+            decreaseButton.classList.add('decrease-btn');
+            const increaseButton = document.createElement('button');
+            increaseButton.classList.add('increase-btn');
+            const quantitySpan = document.createElement('span');
+
+            decreaseButton.textContent = '-';
+            increaseButton.textContent = '+';
+            quantitySpan.textContent = food.quantity;
+
+            decreaseButton.onclick = () => {
+                if (food.quantity > 0) {
+                    food.quantity--; // 減少數量
+                    quantitySpan.textContent = food.quantity; // 更新界面
+                    updateIngredientQuantity(food); // 同步到 Local Storage
+                }
+            };
+        
+            increaseButton.onclick = () => {
+                food.quantity++; // 增加數量
+                quantitySpan.textContent = food.quantity; // 更新界面
+                updateIngredientQuantity(food); // 同步到 Local Storage
+            };
+        
+            // 添加數量及按鈕到數量單元格
+            quantityCell.appendChild(decreaseButton);
+            quantityCell.appendChild(quantitySpan);
+            quantityCell.appendChild(increaseButton);
+
             row.innerHTML = `
                 <td>${food.name}</td>
-                <td>${food.quantity}</td>
+                <td></td> <!-- 空的，後面插入數量 -->
                 <td>${food.expiry}</td>
                 <td>${food.category}</td>
             `;
+
+            row.children[1].replaceWith(quantityCell); // 替換數量欄位
+
             // 检查是否即将过期
             const foodExpiry = new Date(food.expiry);
             const timeDiff = foodExpiry - currentDate;
@@ -156,6 +192,7 @@ function loadFood() {
             // 添加删除按钮
             const actionCell = document.createElement('td');
             const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delet-btn');
             deleteButton.textContent = '刪除';
             const foodKey = `food-${food.name}`; // 确保使用正确的键名
             deleteButton.onclick = () => deleteIngredient(foodKey);
@@ -192,6 +229,12 @@ function loadFood() {
             warningDiv.appendChild(warningMessage);
         }
     });  
+}
+
+// 將數量的變化同步到 Local Storage
+function updateIngredientQuantity(food) {
+    const foodKey = `food-${food.name}`;
+    localStorage.setItem(foodKey, JSON.stringify(food));
 }
 
 // 添加食材到 Local Storage

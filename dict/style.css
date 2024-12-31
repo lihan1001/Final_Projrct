@@ -231,7 +231,7 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     background-color: #f4f4f4;
 }
 
-.category-section td button {
+.delet-btn {
     background-color: #ff6f61;
     color: white;
     border: none;
@@ -240,8 +240,36 @@ th:nth-child(5) { width: 50px; }  /* 第五欄固定80px */
     cursor: pointer;
 }
 
-.category-section td button:hover {
+.delet-btn:hover{
     background-color: #ff4b3a;
+}
+
+/* 數量按鈕 */
+.decrease-btn, .increase-btn{
+    background-color: #669bbc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.decrease-btn:hover, .increase-btn:hover {
+    background-color: #8ecae6;
+}
+
+/* 設定數量區域的對齊方式 */
+.quantity-cell {
+    display: flex; /* 使用彈性盒子模型 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+}
+
+/* 數量文字的樣式 */
+.quantity-cell span {
+    min-width: 40px; /* 確保數字區域寬度一致 */
+    text-align: center; /* 文字居中 */
+    font-size: 16px; /* 字體大小 */
 }
 
 /*清單按鈕*/
